@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import 'animate.css';
@@ -26,21 +27,27 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
-    let response = await fetch("http://localhost:5000/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(formDetails),
-    });
-    setButtonText("Send");
-    let result = await response.json();
-    setFormDetails(formInitialDetails);
-    if (result.code == 200) {
-      setStatus({ succes: true, message: 'Message sent successfully'});
-    } else {
-      setStatus({ succes: false, message: 'Something went wrong, please try again later.'});
-    }
+
+    if(window.Email){
+      window.Email.send({
+          Host : "smtp.elasticemail.com",
+          Port: 2525,
+          Username : "sahaj@orefox.com",
+          Password : "0706978106FFE5F5404755068D266B7F4BEE",
+          To : 'coolsahaj16@gmail.com',
+          From : 'sahaj@orefox.com',
+          Subject : 'Email from Portfolio',
+          Body :  `<div><strong> Name: </strong> ${formDetails.firstName} ${formDetails.lastName}</div>
+              <div><strong> Email: </strong> ${formDetails.email}  </div>
+              <div><strong> Phone Number: </strong> ${formDetails.phone}  </div>
+              <div><strong> Message: </strong> ${formDetails.message}  </div>`
+      })
+      .then(
+        message => toast('Email Sent')
+      );
+      setFormDetails(formInitialDetails);
+      setButtonText("Send");
+  }
   };
 
   return (
@@ -65,7 +72,7 @@ export const Contact = () => {
                       <input type="text" value={formDetails.firstName} placeholder="First Name" onChange={(e) => onFormUpdate('firstName', e.target.value)} />
                     </Col>
                     <Col size={12} sm={6} className="px-1">
-                      <input type="text" value={formDetails.lasttName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)}/>
+                      <input type="text" value={formDetails.lastName} placeholder="Last Name" onChange={(e) => onFormUpdate('lastName', e.target.value)}/>
                     </Col>
                     <Col size={12} sm={6} className="px-1">
                       <input type="email" value={formDetails.email} placeholder="Email Address" onChange={(e) => onFormUpdate('email', e.target.value)} />
