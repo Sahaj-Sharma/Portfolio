@@ -1,7 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 //import { MailchimpForm } from "./MailchimpForm";
-import logo from "../assets/img/logo.svg";
+// import logo from "../assets/img/logo.svg";
 import navIcon1 from "../assets/img/nav-icon1.svg";
+import logo from "../assets/img/logo.png";
 import { FaGithub } from "react-icons/fa";
 
 export const Footer = () => {

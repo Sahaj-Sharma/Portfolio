@@ -11,7 +11,7 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "Web Developer", "Web Designer", "UI/UX Designer" ];
+  const toRotate = [ "Web Developer", "Data Sciencist" ];
   const period = 2000;
 
   useEffect(() => {
@@ -56,7 +56,8 @@ export const Banner = () => {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Welcome! I'm Sahaj`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Developer", "Data Scientist", "Project Manager" ]'><span className="wrap">{text}</span></span></h1>
+                <h1>{`I'm Sahaj`} </h1>
+                <h1><span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Software Developer", "Data Scientist", "Project Manager" ]'><span className="wrap">{text}</span></span></h1>
                   <p>A Computer Science graduate specializing in Data Science and AI. With two years of professional experience, I've contributed as both a Junior Data Engineer and Software Developer, managing teams and designing impactful projects. Explore my portfolio to see how I harness technology to drive innovation and solve complex challenges. Let's connect and collaborate on exciting opportunities in the world of data science and AI!</p>
                   <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
               </div>}
